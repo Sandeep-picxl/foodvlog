@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<html>
+<head>
+	<title>Shopping Cart</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{ % static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'%}">
+	<link href="{ % static 'https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet'%}">
+	<link rel="stylesheet" href="{ % static 'assets/css/style.css'%}">
+</head>
+<body>
+	<main class="page">
+		<section class="shopping-cart dark">
+			<div class="container">
+		        <div class="block-heading">
+		          <h2>Shopping Cart</h2>
+		        </div>
+						
+			{% for i in ci %}
+					
+		      <div class="content">
+	 				<div class="row">
+	 					<div class="col-md-12 col-lg-8">
+	 						<div class="items">
+				 				<div class="product">
+				 					<div class="row">
+					 					<div class="col-md-3">
+											<div class="image">
+		                                    <a href="{{i.prodt.get_url}}" ><img src="{{i.prodt.img.url}}" alt="" style="height: 70;width:100;" /></a>
+			                                </div>
+					 					</div>
+					 					<div class="col-md-8">
+					 						<div class="info">
+						 						<div class="row">
+							 						<div class="col-md-5 product-name">
+							 							<div class="product-name">
+								 							<a href="{{i.prodt.get_url}}"><span>{{i.prodt.name}}</span></a>
+								 							<div class="product-info">
+									 							<div>Id: <span class="value">{{i.prodt.id}}</span></div>
+																<div>Price: <span class="value">{{i.prodt.price}}<br><a href="{% url 'addcart' i.prodt.id %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-plus"style="font-size:11px"></i></a>&nbsp;&nbsp;{{i.quan}}&nbsp;&nbsp;<a href="{% url 'cart_decrement' i.prodt.id %}"><i class="fa fa-minus"style="font-size:11px"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$&nbsp;{{i.total}}</a></span></div>
+									 						</div>
+									 					</div>
+							 						</div>
+							 						<div class="col-md-4 quantity">
+							 							<label for="quantity">Quantity:{{i.quan}}</label>
+							 							<a href="{% url 'remove' i.prodt.id %}">delete</i></a>
+							 						</div>
+							 						
+							 					</div>
+							 				</div>
+					 					</div>
+					 				</div>
+				 				</div>
+								{% endfor %}
+								<div class="col-md-12 col-lg-4">
+			 				<div class="summary">
+			 					<h3>Summary</h3>
+			 					<div class="summary-item"><span class="text">Subtotal</span><span class="price">${{t}}</span></div>
+			 					<div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
+			 					<div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
+			 					<div class="summary-item"><span class="text">Total</span><span class="price">${{t}}</span></div>
+			 					<button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+				 			</div>
+			 			</div>
+		 			</div>
+		 		</div>
+	 		  </div>
+				  
+			  </div>
+			</div>
+			
+		</section>
+		
+	</main>
+	
+</body>
+<script src="{ % static 'https://code.jquery.com/jquery-3.2.1.min.js'%}"></script>
+<script src="{ % static 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'%}"></script>
+</body>
+</html>
+{% endblock %}
